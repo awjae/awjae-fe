@@ -1,18 +1,46 @@
 import Link from 'next/link';
 import type { NextPage } from 'next';
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import useStore from '../utilities/store';
+import { UserInfo } from '../types/userInfo';
+
+interface UserInfoProps extends UserInfo {
+  removeUser: Function;
+  setUser: Function;
+}
 
 const HomePage: NextPage = () => {
+  const { accessToken, user, removeUser, setUser }: UserInfoProps = useStore(state => state);
+
+  useEffect(() => {
+    if (window.localStorage.getItem("accessToken")) {
+      setUser({
+        accessToken: window.localStorage.getItem("accessToken"),
+        user: {
+          ID: window.localStorage.getItem("user_ID"),
+          NAME: window.localStorage.getItem("user_NAME"),
+        }
+      })
+    }
+  }, [])
+
   return (
     <>
       <Header>
         <Link href='/'>
           <Title>HAUS</Title>
         </Link>
-        <Link href='/login'>
-          <p>login</p>
-        </Link>
+        { accessToken ? 
+            <LogoutButton onClick={() => removeUser() }>
+              <p>{ user.ID }</p>
+              <p>logout</p>
+            </LogoutButton>
+          :
+            <Link href='/login'>
+              <p>login</p>
+            </Link>
+        }
       </Header>
       <Container>
         <Link href='/pagination?page=1'>
@@ -61,4 +89,10 @@ const StyledLink = styled.a`
   & + & {
     margin-top: 40px;
   }
+`;
+
+const LogoutButton = styled.button`
+  outline: none;
+  border: none;
+  text-align: right;
 `;

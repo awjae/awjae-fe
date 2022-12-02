@@ -3,6 +3,7 @@ import type { NextPage } from 'next';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router'
 import styled from 'styled-components';
+import useStore from '../utilities/store';
 
 const LoginPage: NextPage = () => {
   const router = useRouter()
@@ -13,6 +14,7 @@ const LoginPage: NextPage = () => {
     passwordMessage: '',
     isDisabled: true
   });
+  const { setUser } = useStore(state => state);
 
   const { id, password, idMessage, passwordMessage, isDisabled } = inputs;
 
@@ -65,6 +67,7 @@ const LoginPage: NextPage = () => {
     .then((response) => response.json())
     .then((data) => {
       console.log('Success:', data);
+      setUser({ accessToken: data.data.accessToken, user: data.data.user });
       router.push('/');
     })
     .catch((error) => {
