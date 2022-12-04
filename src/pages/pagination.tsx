@@ -8,20 +8,15 @@ import products from '../api/data/products.json';
 import ProductList from '../components/ProductList';
 import Pagination from '../components/Pagination';
 
+import CommonHeader from '../components/common/Header';
+
 const PaginationPage: NextPage = () => {
   const router = useRouter();
   const { page } = router.query;
 
   return (
     <>
-      <Header>
-        <Link href='/'>
-          <Title>HAUS</Title>
-        </Link>
-        <Link href='/login'>
-          <p>login</p>
-        </Link>
-      </Header>
+      <CommonHeader></CommonHeader>
       <Container>
         { Number(page) > Math.floor(products.length / 10) ?
           <div className='error'>
@@ -52,7 +47,7 @@ const Title = styled.a`
   font-size: 48px;
 `;
 
-const Container = styled.div`
+const Container = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;

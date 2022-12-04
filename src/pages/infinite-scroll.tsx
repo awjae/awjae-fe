@@ -6,18 +6,13 @@ import styled from 'styled-components';
 import products from '../api/data/products.json';
 import ProductList from '../components/ProductList';
 
+import CommonHeader from '../components/common/Header';
+
 const InfiniteScrollPage: NextPage = () => {
 
   return (
     <>
-      <Header>
-        <Link href='/'>
-          <Title>HAUS</Title>
-        </Link>
-        <Link href='/login'>
-          <p>login</p>
-        </Link>
-      </Header>
+      <CommonHeader></CommonHeader>
       <Container>
         <ProductList products={products} isInfinite={true}/>
       </Container>
@@ -38,7 +33,7 @@ const Title = styled.a`
   font-size: 48px;
 `;
 
-const Container = styled.div`
+const Container = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;

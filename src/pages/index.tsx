@@ -2,41 +2,13 @@ import Link from 'next/link';
 import type { NextPage } from 'next';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import useStore from '../utilities/store';
-import { UserInfo } from '../types/userInfo';
+
+import CommonHeader from '../components/common/Header';
 
 const HomePage: NextPage = () => {
-  const { accessToken, user, removeUser, setUser }: UserInfo = useStore(state => state);
-
-  useEffect(() => {
-    if (window.localStorage.getItem("accessToken")) {
-      setUser({
-        accessToken: window.localStorage.getItem("accessToken"),
-        user: {
-          ID: window.localStorage.getItem("user_ID"),
-          NAME: window.localStorage.getItem("user_NAME"),
-        }
-      })
-    }
-  }, [])
-
   return (
     <>
-      <Header>
-        <Link href='/'>
-          <Title>HAUS</Title>
-        </Link>
-        { accessToken ? 
-            <LogoutButton onClick={() => removeUser() }>
-              <p>{ user.ID }</p>
-              <p>logout</p>
-            </LogoutButton>
-          :
-            <Link href='/login'>
-              <p>login</p>
-            </Link>
-        }
-      </Header>
+      <CommonHeader></CommonHeader>
       <Container>
         <Link href='/pagination?page=1'>
           <StyledLink>pagination</StyledLink>
@@ -51,18 +23,18 @@ const HomePage: NextPage = () => {
 
 export default HomePage;
 
-const Header = styled.div`
+const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px;
 `;
 
-const Title = styled.a`
+const Title = styled.h1`
   font-size: 48px;
 `;
 
-const Container = styled.div`
+const Container = styled.main`
   display: flex;
   flex-direction: column;
   justify-content: center;
