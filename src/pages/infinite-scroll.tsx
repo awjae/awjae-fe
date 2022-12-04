@@ -1,12 +1,13 @@
 import Link from 'next/link';
 import type { NextPage } from 'next';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import products from '../api/data/products.json';
 import ProductList from '../components/ProductList';
 
 const InfiniteScrollPage: NextPage = () => {
+
   return (
     <>
       <Header>
@@ -18,7 +19,7 @@ const InfiniteScrollPage: NextPage = () => {
         </Link>
       </Header>
       <Container>
-        <ProductList products={products} />
+        <ProductList products={products} isInfinite={true}/>
       </Container>
     </>
   );

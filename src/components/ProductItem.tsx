@@ -6,19 +6,24 @@ import { Product } from '../types/product';
 
 type ProductItemProps = {
   product: Product;
+  isInfinite: boolean;
 };
 
-const ProductItem = ({ product: { name, thumbnail, price, id } }: ProductItemProps) => {
+const ProductItem = ({ product: { name, thumbnail, price, id }, isInfinite }: ProductItemProps) => {
   const router = useRouter();
   const goDetail = (id: string) => {
+    if (isInfinite) {
+      window.sessionStorage.setItem("target", id);
+    }
     router.push(`/products/${id}`);
   }
 
   return (
     <Container onClick={ () => goDetail(id) }>
-      <Thumbnail src={thumbnail ? thumbnail : '/defaultThumbnail.jpg'} />
+      <Thumbnail src={thumbnail ? thumbnail : '/defaultThumbnail.jpg'} loading="lazy" data-id={id}/>
       <Name>{name}</Name>
       <Price>{price.toLocaleString()}</Price>
+      <p>{id}</p>
     </Container>
   );
 };
