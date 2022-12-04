@@ -1,12 +1,7 @@
 import create from 'zustand'
 import { UserInfo } from '../types/userInfo'
 
-interface UserInfoProps extends UserInfo {
-  setUser: Function;
-  removeUser: Function;
-}
-
-const useStore = create<UserInfoProps>(set => ({
+const useStore = create<UserInfo>(set => ({
   accessToken: '',
   user: {
     ID: '',

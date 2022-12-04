@@ -5,13 +5,8 @@ import styled from 'styled-components';
 import useStore from '../utilities/store';
 import { UserInfo } from '../types/userInfo';
 
-interface UserInfoProps extends UserInfo {
-  removeUser: Function;
-  setUser: Function;
-}
-
 const HomePage: NextPage = () => {
-  const { accessToken, user, removeUser, setUser }: UserInfoProps = useStore(state => state);
+  const { accessToken, user, removeUser, setUser }: UserInfo = useStore(state => state);
 
   useEffect(() => {
     if (window.localStorage.getItem("accessToken")) {

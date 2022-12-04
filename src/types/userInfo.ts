@@ -4,4 +4,6 @@ export type UserInfo = {
     NAME: string;
   };
   accessToken: string;
+  setUser: Function;
+  removeUser: Function;
 }

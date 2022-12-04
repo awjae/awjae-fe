@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import type { NextPage } from 'next';
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 import products from '../api/data/products.json';
@@ -23,8 +23,17 @@ const PaginationPage: NextPage = () => {
         </Link>
       </Header>
       <Container>
-        <ProductList products={products.slice(0, 10)} />
-        <Pagination />
+        { Number(page) > Math.floor(products.length / 10) ?
+          <div className='error'>
+            존재하지 않는 페이지입니다.
+          </div>
+          :
+          <>
+            <ProductList products={products.slice(10*(Number(page)) - 1, 10*(Number(page)) + 9)} />
+            <Pagination queryIdx={ page } productsLength={ products.length }/>
+          </>
+        }
+        
       </Container>
     </>
   );
@@ -48,4 +57,9 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 0 20px 40px;
+  .error {
+    height: 300px;
+    display: flex;
+    align-items: center;
+  }
 `;
