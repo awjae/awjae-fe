@@ -23,7 +23,6 @@ const ProductItem = ({ product: { name, thumbnail, price, id }, isInfinite }: Pr
       <Thumbnail src={thumbnail ? thumbnail : '/defaultThumbnail.jpg'} loading="lazy" data-id={id}/>
       <Name>{name}</Name>
       <Price>{price.toLocaleString()}</Price>
-      <p>{id}</p>
     </Container>
   );
 };
