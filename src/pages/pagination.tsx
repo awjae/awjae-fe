@@ -1,13 +1,9 @@
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import type { NextPage } from 'next';
-import React, { useEffect } from 'react';
 import styled from 'styled-components';
-
 import products from '../api/data/products.json';
 import ProductList from '../components/ProductList';
 import Pagination from '../components/Pagination';
-
 import CommonHeader from '../components/common/Header';
 
 const PaginationPage: NextPage = () => {
@@ -35,17 +31,6 @@ const PaginationPage: NextPage = () => {
 };
 
 export default PaginationPage;
-
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-`;
-
-const Title = styled.a`
-  font-size: 48px;
-`;
 
 const Container = styled.main`
   display: flex;

@@ -6,7 +6,7 @@ import { Product } from '../types/product';
 
 type ProductItemProps = {
   product: Product;
-  isInfinite: boolean;
+  isInfinite?: boolean;
 };
 
 const ProductItem = ({ product: { name, thumbnail, price, id }, isInfinite }: ProductItemProps) => {

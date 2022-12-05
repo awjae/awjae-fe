@@ -1,9 +1,8 @@
-import Link from 'next/link';
 import type { NextPage } from 'next';
 import React from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
-
+import CommonHeader from '../../components/common/Header';
 import products from '../../api/data/products.json';
 
 const ProductDetailPage: NextPage = () => {
@@ -13,14 +12,7 @@ const ProductDetailPage: NextPage = () => {
 
   return (
     <>
-      <Header>
-        <Link href='/'>
-          <Title>HAUS</Title>
-        </Link>
-        <Link href='/login'>
-          <p>login</p>
-        </Link>
-      </Header>
+      <CommonHeader></CommonHeader>
       { Number(id) <= products.length && (
         <>
           <Thumbnail src={product.thumbnail ? product.thumbnail : '/defaultThumbnail.jpg'} />
@@ -40,17 +32,6 @@ const ProductDetailPage: NextPage = () => {
 };
 
 export default ProductDetailPage;
-
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-`;
-
-const Title = styled.a`
-  font-size: 48px;
-`;
 
 const Thumbnail = styled.img`
   width: 100%;

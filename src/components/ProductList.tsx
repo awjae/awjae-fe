@@ -4,7 +4,7 @@ import { Product } from '../types/product';
 import ProductItem from './ProductItem';
 type ProductListProps = {
   products: Product[];
-  isInfinite: boolean;
+  isInfinite?: boolean;
 };
 
 const ProductList = ({ products, isInfinite }: ProductListProps) => {
@@ -65,8 +65,4 @@ const Container = styled.div`
   & > span {
     display: inherit;
   }
-`;
-
-const ObserverWrapper = styled.span`
-  display: inherit;
 `;

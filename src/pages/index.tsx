@@ -1,8 +1,6 @@
 import Link from 'next/link';
 import type { NextPage } from 'next';
-import React, { useEffect } from 'react';
 import styled from 'styled-components';
-
 import CommonHeader from '../components/common/Header';
 
 const HomePage: NextPage = () => {
@@ -22,17 +20,6 @@ const HomePage: NextPage = () => {
 };
 
 export default HomePage;
-
-const Header = styled.header`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-`;
-
-const Title = styled.h1`
-  font-size: 48px;
-`;
 
 const Container = styled.main`
   display: flex;
@@ -56,10 +43,4 @@ const StyledLink = styled.a`
   & + & {
     margin-top: 40px;
   }
-`;
-
-const LogoutButton = styled.button`
-  outline: none;
-  border: none;
-  text-align: right;
 `;

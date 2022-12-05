@@ -1,15 +1,10 @@
-import Link from 'next/link';
 import type { NextPage } from 'next';
-import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-
 import products from '../api/data/products.json';
 import ProductList from '../components/ProductList';
-
 import CommonHeader from '../components/common/Header';
 
 const InfiniteScrollPage: NextPage = () => {
-
   return (
     <>
       <CommonHeader></CommonHeader>
@@ -21,17 +16,6 @@ const InfiniteScrollPage: NextPage = () => {
 };
 
 export default InfiniteScrollPage;
-
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-`;
-
-const Title = styled.a`
-  font-size: 48px;
-`;
 
 const Container = styled.main`
   display: flex;

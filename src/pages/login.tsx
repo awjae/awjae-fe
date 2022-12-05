@@ -1,9 +1,9 @@
-import Link from 'next/link';
 import type { NextPage } from 'next';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router'
 import styled from 'styled-components';
 import useStore from '../utilities/store';
+import CommonHeader from '../components/common/Header';
 
 const LoginPage: NextPage = () => {
   const router = useRouter()
@@ -77,14 +77,7 @@ const LoginPage: NextPage = () => {
 
   return (
     <>
-      <Header>
-        <Link href='/'>
-          <Title>HAUS</Title>
-        </Link>
-        <Link href='/login'>
-          <p>login</p>
-        </Link>
-      </Header>
+      <CommonHeader></CommonHeader>
       <Form>
         <div>아이디</div>
         <TextInput type='text' name='id' value={ id } onChange={ onChange } onBlur={ (e: React.ChangeEvent<HTMLInputElement>) => validationValues('id', e.target.value) }/>
@@ -99,17 +92,6 @@ const LoginPage: NextPage = () => {
 };
 
 export default LoginPage;
-
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-`;
-
-const Title = styled.a`
-  font-size: 48px;
-`;
 
 const Form = styled.div`
   display: flex;
