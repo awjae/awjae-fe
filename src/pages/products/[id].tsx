@@ -1,44 +1,37 @@
-import Link from 'next/link';
 import type { NextPage } from 'next';
 import React from 'react';
 import styled from 'styled-components';
-
+import { useRouter } from 'next/router';
+import CommonHeader from '../../components/common/Header';
 import products from '../../api/data/products.json';
 
 const ProductDetailPage: NextPage = () => {
+  const router = useRouter();
+  const { id } = router.query;
   const product = products[0];
 
   return (
     <>
-      <Header>
-        <Link href='/'>
-          <Title>HAUS</Title>
-        </Link>
-        <Link href='/login'>
-          <p>login</p>
-        </Link>
-      </Header>
-      <Thumbnail src={product.thumbnail ? product.thumbnail : '/defaultThumbnail.jpg'} />
-      <ProductInfoWrapper>
-        <Name>{product.name}</Name>
-        <Price>{product.price}원</Price>
-      </ProductInfoWrapper>
+      <CommonHeader></CommonHeader>
+      { Number(id) <= products.length && (
+        <>
+          <Thumbnail src={product.thumbnail ? product.thumbnail : '/defaultThumbnail.jpg'} />
+          <ProductInfoWrapper>
+            <Name>{product.name}</Name>
+            <Price>{product.price}원</Price>
+          </ProductInfoWrapper>
+        </>
+      )}
+      { Number(id) > products.length && (
+        <Error>
+          존재하지 않는 페이지입니다.
+        </Error>
+      )}
     </>
   );
 };
 
 export default ProductDetailPage;
-
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-`;
-
-const Title = styled.a`
-  font-size: 48px;
-`;
 
 const Thumbnail = styled.img`
   width: 100%;
@@ -58,4 +51,11 @@ const Name = styled.div`
 const Price = styled.div`
   font-size: 18px;
   margin-top: 8px;
+`;
+
+const Error = styled.div`
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

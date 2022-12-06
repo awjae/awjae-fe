@@ -1,21 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
+import { useRouter } from 'next/router';
+import usePagination from '../hooks/usePagination';
 
-const Pagination = () => {
+const Pagination = ({ queryIdx, productsLength }: { queryIdx: string | string[] | undefined; productsLength: number}) => {
+  const router = useRouter();
+  const [page, goPrev, goNext, range, lastPage] = usePagination({currentPage: queryIdx, currentRange: [1, 2, 3, 4, 5], productsLength: productsLength});
+
+  const goPage = (page: number) => {
+    router.push(`/pagination?page=${page}`);
+  }
+  const canPrev = range.indexOf(1) > -1 ? true : false;
+  const canNext = range.indexOf(lastPage) > -1 ? true : false;
+  
   return (
     <Container>
-      <Button disabled>
+      <Button disabled={canPrev} onClick={() => goPrev()}>
         <VscChevronLeft />
       </Button>
       <PageWrapper>
-        {[1, 2, 3, 4, 5].map((page) => (
-          <Page key={page} selected={page === 1} disabled={page === 1}>
+        {(range as number[]).map((page: number) => (
+          <Page key={page} selected={page === Number(queryIdx)} disabled={page === Number(queryIdx)} onClick={ () => goPage(page) }>
             {page}
           </Page>
         ))}
       </PageWrapper>
-      <Button disabled={false}>
+      <Button disabled={canNext} onClick={() => goNext()}>
         <VscChevronRight />
       </Button>
     </Container>
@@ -55,7 +66,7 @@ const Page = styled.button<PageType>`
   background-color: ${({ selected }) => (selected ? '#000' : 'transparent')};
   color: ${({ selected }) => (selected ? '#fff' : '#000')};
   font-size: 20px;
-
+  cursor: pointer;
   & + & {
     margin-left: 4px;
   }

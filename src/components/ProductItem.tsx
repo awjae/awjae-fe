@@ -1,18 +1,31 @@
 import styled from 'styled-components';
+import { useRouter } from 'next/router'
+
 
 import { Product } from '../types/product';
 
 type ProductItemProps = {
   product: Product;
+  isInfinite?: boolean;
 };
 
-const ProductItem = ({ product: { name, thumbnail, price } }: ProductItemProps) => (
-  <Container>
-    <Thumbnail src={thumbnail ? thumbnail : '/defaultThumbnail.jpg'} />
-    <Name>{name}</Name>
-    <Price>{price}</Price>
-  </Container>
-);
+const ProductItem = ({ product: { name, thumbnail, price, id }, isInfinite }: ProductItemProps) => {
+  const router = useRouter();
+  const goDetail = (id: string) => {
+    if (isInfinite) {
+      window.sessionStorage.setItem("target", id);
+    }
+    router.push(`/products/${id}`);
+  }
+
+  return (
+    <Container onClick={ () => goDetail(id) }>
+      <Thumbnail src={thumbnail ? thumbnail : '/defaultThumbnail.jpg'} loading="lazy" data-id={id}/>
+      <Name>{name}</Name>
+      <Price>{price.toLocaleString()}</Price>
+    </Container>
+  );
+};
 
 export default ProductItem;
 
